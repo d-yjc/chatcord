@@ -23,4 +23,5 @@ class ChatUserFactory extends Factory
             'password' => fake()->password()
         ];
     }
+    
 }

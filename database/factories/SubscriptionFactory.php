@@ -24,8 +24,6 @@ class SubscriptionFactory extends Factory
             'tier' => fake()->randomElement(['basic', 'standard', 'premium']),
             'status' => fake()->randomElement(['active', 'cancelled']),
             'duration' => fake()->numberBetween(1,12),
-            //Range set at min=2, because the hard-coded example already takes chat_user_id = 1.
-            'chat_user_id' => $this -> faker->unique()->numberBetween(2, $chatUserCount)
         ];
     }
 }

@@ -5,7 +5,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use App\Models\ChatUser;
+use App\Models\Post;
+use App\Models\Comment;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -13,9 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(ChatUserSeeder::class);
-        $this->call(SubscriptionSeeder::class);
-        $this->call(PostSeeder::class);
-        $this->call(CommentSeeder::class);
+        ChatUser::factory()
+        ->count(50)
+        ->has(Post::factory()->count(rand(1, 7), 'posts'))
+        ->has(Comment::factory()->count(rand(1,10), 'comments'))
+        ->hasSubscription(1)
+        ->create();         
     }
 }

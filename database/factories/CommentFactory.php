@@ -17,10 +17,9 @@ class CommentFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+        return [                    
             //
-            'body' => fake()->sentence(6),
-            'chat_user_id' => ChatUser::inRandomOrder()->first()->id,
+            'body' => fake()->sentence(6),   
             'post_id' => Post::inRandomOrder()->first()->id
         ];
     }
