@@ -24,4 +24,9 @@ class ChatUser extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
 }
