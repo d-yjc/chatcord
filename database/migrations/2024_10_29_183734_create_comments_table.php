@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             //foreign id to post's id
-            //foreign id to user's id
+            $table->bigInteger('chat_user_id')->unsigned();
+            $table->foreign('chat_user_id')->references('id')->on('chat_users')
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->string('body');
             $table->timestamps();
         });

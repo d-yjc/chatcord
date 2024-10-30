@@ -9,4 +9,9 @@ class Comment extends Model
 {
     //
     use HasFactory;
+
+    public function chatUser()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

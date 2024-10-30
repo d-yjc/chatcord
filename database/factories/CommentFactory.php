@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\ChatUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +18,8 @@ class CommentFactory extends Factory
     {
         return [
             //
-            'body' => fake()->sentence(6)
+            'body' => fake()->sentence(6),
+            'chat_user_id' => ChatUser::inRandomOrder()->first()->id
         ];
     }
 }

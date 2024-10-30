@@ -15,6 +15,7 @@ class CommentSeeder extends Seeder
         //
         $testComment = new Comment;
         $testComment->body = "stop necro posting brah!";
+        $testComment->chat_user_id = 1;
         $testComment->save();
 
         Comment::factory()->count(50)->create();
