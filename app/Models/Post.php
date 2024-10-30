@@ -19,5 +19,10 @@ class Post extends Model
     {
         return $this->belongsTo(ChatUser::class);
     }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
     
 }
