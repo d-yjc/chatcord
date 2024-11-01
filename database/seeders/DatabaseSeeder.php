@@ -13,13 +13,13 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
-    {
-        ChatUser::factory()
-        ->count(50)
-        ->has(Post::factory()->count(rand(1, 7), 'posts'))
-        ->has(Comment::factory()->count(rand(1,10), 'comments'))
-        ->hasSubscription(1)
-        ->create();         
-    }
-}
+                public function run(): void
+                {
+                    ChatUser::factory() 
+                    ->hasPosts(rand(1,5))
+                    ->hasComments(rand(1, 5))       
+                    ->hasSubscription(1)
+                    ->count(50)
+                    ->create();         
+                }
+            }   

@@ -14,3 +14,4 @@ class Subscription extends Model
         return $this->belongsTo(ChatUser::class);
     }
 }
+    

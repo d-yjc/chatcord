@@ -20,7 +20,6 @@ class SubscriptionFactory extends Factory
         $faker = Faker::create();
         $chatUserCount = ChatUser::count(); 
         return [
-            //
             'tier' => fake()->randomElement(['basic', 'standard', 'premium']),
             'status' => fake()->randomElement(['active', 'cancelled']),
             'duration' => fake()->numberBetween(1,12),

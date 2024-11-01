@@ -18,9 +18,9 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [                    
-            //
             'body' => fake()->sentence(6),   
             'post_id' => Post::inRandomOrder()->first()->id
         ];
     }
 }
+    

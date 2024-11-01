@@ -20,7 +20,7 @@ return new class extends Migration
             $table->bigInteger('chat_user_id')->unsigned()->unique();
             $table->foreign('chat_user_id')->references('id')->on('chat_users')
                 ->onDelete('cascade')->onUpdate('cascade');
-
+            
             $table->timestamps();
         });
     }
