@@ -3,6 +3,7 @@
 namespace Database\Factories;
 use App\Models\ChatUser;
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,8 +20,18 @@ class CommentFactory extends Factory
     {
         return [                    
             'body' => fake()->sentence(6),   
-            'post_id' => Post::inRandomOrder()->first()->id
+            'chat_user_id' =>ChatUser::factory(),
+            'post_id' => Post::factory()
         ];
     }
+
+    public function configure()         
+    {           
+        return $this->afterMaking(function (Comment $comment) {
+            $comment->chat_user_id = ChatUser::inRandomOrder()->first()->id;
+            $comment->post_id = Post::inRandomOrder()->first()->id;
+        });
+    }
+    
 }
     

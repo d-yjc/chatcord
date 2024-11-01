@@ -23,3 +23,4 @@ class ChatUserSeeder extends Seeder
         ChatUser::factory()->count(50)->create();
     }
 }
+        

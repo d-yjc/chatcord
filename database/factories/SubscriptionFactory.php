@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-use App\Models\ChatUser;
+
 use Faker\Factory as Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,8 +17,7 @@ class SubscriptionFactory extends Factory
      */
     public function definition(): array
     {   
-        $faker = Faker::create();
-        $chatUserCount = ChatUser::count(); 
+        $faker = Faker::create();                    
         return [
             'tier' => fake()->randomElement(['basic', 'standard', 'premium']),
             'status' => fake()->randomElement(['active', 'cancelled']),

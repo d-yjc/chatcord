@@ -20,15 +20,15 @@ class PostFactory extends Factory
         return [
             'topic' => fake()->sentence(4),
             'body' => fake()->sentence(6),
-            //'chat_user_id' => ChatUser::inRandomOrder()->first()->id,
+            'chat_user_id' => ChatUser::factory()
         ];  
     }
     
-    public function configure()
-    {           
-        return $this->afterMaking(function (Post $post) {
-            $post->chat_user_id = ChatUser::inRandomOrder()->first()->id;
-        });
+        public function configure()
+        {           
+            return $this->afterMaking(function (Post $post) {
+                $post->chat_user_id = ChatUser::inRandomOrder()->first()->id;
+            });
+        }
     }
-}
     
