@@ -1,11 +1,17 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('posts', PostController::class);
+
+Route::resource('posts.comments', CommentController::class)->shallow();
 
 Route::get('/dashboard', function () {
     return view('dashboard');

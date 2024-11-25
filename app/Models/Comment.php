@@ -18,4 +18,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    public function attachment()
+    {
+        return $this->morphOne(Attachment::class, 'attachable');
+    }
 }

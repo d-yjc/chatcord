@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Factories;
+use App\Models\Attachment;
 use App\Models\ChatUser;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -28,6 +29,16 @@ class PostFactory extends Factory
         {           
             return $this->afterMaking(function (Post $post) {
                 $post->chat_user_id = ChatUser::inRandomOrder()->first()->id;
+            });
+        }
+
+        public function withAttachment()
+        {
+            return $this->afterCreating(function (Post $post) {
+                $attachment = Attachment::factory()->create([
+                    'attachable_id' => $post->id,
+                    'attachable_type' => get_class($post),
+                ]);
             });
         }
     }

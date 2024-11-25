@@ -23,5 +23,9 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function attachment() {
+        return $this->morphOne(Attachment::class, 'attachable');
+    }
     
 }

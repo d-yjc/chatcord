@@ -11,7 +11,7 @@ class ChatUserTableSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run(): void 
     {
         //      
         $testUser = new ChatUser;
