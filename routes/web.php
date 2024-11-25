@@ -9,6 +9,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/post/{id}', [PostController::class, 'show']);
+
+
 Route::resource('posts', PostController::class);
 
 Route::resource('posts.comments', CommentController::class)->shallow();
