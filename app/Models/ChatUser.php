@@ -4,17 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class ChatUser extends Model
+class ChatUser extends Authenticatable
 {
-    //
-    use HasFactory;
+    use HasFactory, Notifiable;
 
-    /**
-     * Get the posts that the user has written.
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+
+    protected $fillable = [
+        'username',
+        'email',
+        'password',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -28,5 +36,23 @@ class ChatUser extends Model
     public function subscription()
     {
         return $this->hasOne(Subscription::class);
+    }
+
+    public function roles() {
+        return $this->belongsToMany(Role::class, 'chat_user_role')->withTimestamps();
+    }
+
+    public function assignRole(Role $role) {
+        return $this->roles()->attach($role->id);
+    }
+
+    public function removeRole(Role $role)
+    {
+        return $this->roles()->detach($role->id);
+    }
+
+    public function hasExistingRole($roleName)
+    {
+        return $this->roles()->where('name', $roleName)->exists();
     }
 }

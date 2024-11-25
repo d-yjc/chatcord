@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\ChatUser;
+use App\Models\Subscription;
 use Faker\Factory as Faker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

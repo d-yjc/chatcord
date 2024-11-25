@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->string('tier')->comment('basic, standard, premium');
-            $table->string('status')->comment('active, cancelled');
+            $table->enum('tier', ['basic', 'standard', 'premium']); 
+            $table->enum('status', ['active', 'cancelled']);
             $table->integer('duration')->unsigned()->comment('Unit in month(s).');
+
             //Set to unique, as this is one-to-ONE, not one-to-MANY.
             $table->bigInteger('chat_user_id')->unsigned()->unique();
             $table->foreign('chat_user_id')->references('id')->on('chat_users')

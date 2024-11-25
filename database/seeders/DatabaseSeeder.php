@@ -8,18 +8,23 @@ use Illuminate\Database\Seeder;
 use App\Models\ChatUser;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Subscription;
+use App\Models\Group;
+use Hash;
+
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
      */
-                public function run(): void
-                {
-                    ChatUser::factory() 
-                    ->hasPosts(rand(1,5))
-                    ->hasComments(rand(1, 5))       
-                    ->hasSubscription(1)
-                    ->count(50)
-                    ->create();         
-                }
-            }   
+    public function run(): void
+    {
+        $this->call([
+            RoleTableSeeder::class,
+            ChatUserTableSeeder::class,
+            PostTableSeeder::class,
+            CommentTableSeeder::class,
+            SubscriptionTableSeeder::class,
+        ]);
+    }
+}
