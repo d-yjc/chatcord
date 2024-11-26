@@ -31,18 +31,18 @@ class CommentController extends Controller
     public function store(Request $request, Post $post)
     {
         $request->validate([
-            'content' => 'required|string',
+            'body' => 'required|string',
             'attachment' => 'nullable|file|max:10240', // Max 10 MB
         ]);
     
         // Create the Comment
         $comment = new Comment();
-        $comment->content = $request->input('content');
-        $comment->user_id = auth()->id(); // Ensure the user is authenticated
+        $comment->body = $request->input('body');
+        $comment->chat_user_id = auth()->id(); // Ensure the user is authenticated
         $comment->post_id = $post->id;
         $comment->save();
     
-        // Handle the attachment if present
+        // Handle the attachment if present     
         if ($request->hasFile('attachment')) {
             $file = $request->file('attachment');
     

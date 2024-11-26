@@ -38,10 +38,10 @@ class PostController extends Controller
         ]);
     
         // Create the Post
-        $post = new Post();
+        $post = new Post();     
         $post->topic = $request->input('topic');
         $post->body = $request->input('body');
-        $post->user_id = auth()->id(); // Ensure the user is authenticated
+        $post->chat_user_id = auth()->id(); // Ensure the user is authenticated
         $post->save();
     
         // Handle the attachment if present
@@ -67,7 +67,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id)    
     {
         $post = Post::findOrFail($id);
         return view('posts.show', compact('post'));

@@ -14,18 +14,18 @@
 
     <hr>
 
-    <h2>Comments</h2>
+    <h2>Comments</h2>       
 
     @foreach($post->comments as $comment)
         <div>
-            <p>{{ $comment->content }}</p>
+            <p>{{ $comment->body }}</p>
 
             @if($comment->attachment)
                 <p>Attachment:</p>
                 <a href="{{ asset('storage/' . $comment->attachment->file_path) }}" target="_blank">Download Attachment</a>
             @endif
-
-            <p>By {{ $comment->user->username }} on {{ $comment->created_at->format('Y-m-d H:i') }}</p>
+    
+            <p>By {{ $comment->chatUser->username }} on {{ $comment->created_at->format('Y-m-d H:i') }}</p>
         </div>
     @endforeach
 
@@ -49,8 +49,8 @@
             @csrf
 
             <div>
-                <label for="content">Comment:</label><br>
-                <textarea name="content" id="content" required>{{ old('content') }}</textarea>
+                <label for="body">Comment:</label><br>
+                <textarea name="body" id="body" required>{{ old('body') }}</textarea>
             </div>
 
             <div>
