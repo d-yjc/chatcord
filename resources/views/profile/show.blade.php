@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>{{ $user->name }}'s Profile</h1>
+    <h1>{{ $user->username }}'s Profile</h1>
 
     <h2>Posts</h2>
     <ul>
