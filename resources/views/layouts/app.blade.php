@@ -7,7 +7,7 @@
     <!-- Include CSS files or frameworks here -->
 </head>
 <body>
-    <nav>
+    <nav>   
         <!-- Navigation links -->
         <a href="{{ route('posts.index') }}">Home</a>
         @auth

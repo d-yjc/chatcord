@@ -25,7 +25,11 @@
                 <a href="{{ asset('storage/' . $comment->attachment->file_path) }}" target="_blank">Download Attachment</a>
             @endif
     
-            <p>By {{ $comment->chatUser->username }} on {{ $comment->created_at->format('Y-m-d H:i') }}</p>
+            @if($comment->chatUser)
+                <p>By {{ $comment->chatUser->username }} on {{ $comment->created_at->format('Y-m-d H:i') }}</p>
+            @else
+                <p>By Unknown user (likely null) on {{  $comment->created_at->format('Y-m-d H:i') }}</p>
+            @endif
         </div>
     @endforeach
 
