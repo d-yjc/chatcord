@@ -11,7 +11,7 @@ class Comment extends Model
 
     public function chatUser()
     {
-        return $this->belongsTo(User::class, 'chat_user_id');
+        return $this->belongsTo(ChatUser::class, 'chat_user_id');
     }
 
     public function post()

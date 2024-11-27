@@ -15,8 +15,9 @@ class ProfileController extends Controller
     public function show($id) 
     {
         $user = ChatUser::with(['posts', 'comments'])->findOrFail($id);
-        return view('profiles.show', compact('user'));
+        return view('profile.show', compact('user'));
     }
+    
     /**
      * Display the user's profile form.
      */
@@ -62,5 +63,11 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function showMyProfile() 
+    {
+        $user = Auth::user()->load(['posts', 'comments']);
+        return view('profile.show', compact('user'));
     }
 }

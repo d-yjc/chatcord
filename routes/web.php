@@ -26,6 +26,8 @@ Route::get('/logout', function () {
 })->name('logout');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/my-profile', [ProfileController::class, 'showMyProfile'])->name('profile.my');
+    Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
