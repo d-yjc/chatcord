@@ -9,7 +9,8 @@
 
     @if($post->attachment)
         <p>Attachment:</p>
-        <a href="{{ asset('storage/' . $post->attachment->file_path) }}" target="_blank">Download Attachment</a>
+        <!--<a href="{{ asset('storage/' . $post->attachment->file_path) }}" target="_blank">Download Attachment</a>-->
+        <img src="{{ asset('storage/' . $post->attachment->file_path) }}" alt="Attachment">
     @endif
 
     <hr>
@@ -18,17 +19,15 @@
 
     @foreach($post->comments as $comment)
         <div>
+        @if($comment->chatUser)
+                <p>{{ $comment->chatUser->username }} @ {{ $comment->created_at->format('Y-m-d H:i') }}</p>
+            @else
+                <p>By Unknown user (null) on {{  $comment->created_at->format('Y-m-d H:i') }}</p>
+            @endif
             <p>{{ $comment->body }}</p>
 
             @if($comment->attachment)
-                <p>Attachment:</p>
-                <a href="{{ asset('storage/' . $comment->attachment->file_path) }}" target="_blank">Download Attachment</a>
-            @endif
-    
-            @if($comment->chatUser)
-                <p>By {{ $comment->chatUser->username }} on {{ $comment->created_at->format('Y-m-d H:i') }}</p>
-            @else
-                <p>By Unknown user (likely null) on {{  $comment->created_at->format('Y-m-d H:i') }}</p>
+                <img src="{{ asset('storage/' . $comment->attachment->file_path) }}" alt="Comment attachment"</a>
             @endif
         </div>
     @endforeach

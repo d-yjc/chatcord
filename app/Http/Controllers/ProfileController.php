@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\ChatUser;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,11 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function show($id) 
+    {
+        $user = ChatUser::with(['posts', 'comments'])->findOrFail($id);
+        return view('profiles.show', compact('user'));
+    }
     /**
      * Display the user's profile form.
      */

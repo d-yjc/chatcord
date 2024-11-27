@@ -51,6 +51,7 @@ class CommentController extends Controller
     
             // Create the attachment record
             $attachment = new Attachment([
+                'name' => $file->getClientOriginalName(),
                 'file_path' => $filePath,
             ]);
     

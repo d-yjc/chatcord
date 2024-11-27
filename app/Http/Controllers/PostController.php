@@ -7,7 +7,7 @@ use App\Models\Post;
 
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class PostController extends Controller 
 {
     /**
      * Display a listing of the resource.
@@ -41,25 +41,22 @@ class PostController extends Controller
         $post = new Post();     
         $post->topic = $request->input('topic');
         $post->body = $request->input('body');
-        $post->chat_user_id = auth()->id(); // Ensure the user is authenticated
+        $post->chat_user_id = auth()->id(); 
         $post->save();
     
-        // Handle the attachment if present
+        //Handle the attachment if present
         if ($request->hasFile('attachment')) {
             $file = $request->file('attachment');
-    
-            // Store the file in the 'public' disk under 'attachments' directory
+
+            //Store the file in 'attachments/public'
             $filePath = $file->store('attachments', 'public');
-    
-            // Create the attachment record
+            
             $attachment = new Attachment([
+                'name' => $file->getClientOriginalName(),
                 'file_path' => $filePath,
             ]);
-    
-            // Associate the attachment with the post
             $post->attachment()->save($attachment);
         }
-    
         return redirect()->route('posts.show', $post->id)
                          ->with('success', 'Post created successfully.');               
     }
@@ -69,9 +66,9 @@ class PostController extends Controller
      */
     public function show(string $id)    
     {
-        $post = Post::with('comments.chatUser')->findOrFail($id);
+         $post = Post::with(['attachment', 'comments.attachment', 'comments.chatUser'])->findOrFail($id);
 
-        return view('posts.show', compact('post'));
+    return view('posts.show', compact('post'));
     }
 
     /**

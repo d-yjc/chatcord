@@ -31,7 +31,7 @@
 
         <div>
             <label for="attachment">Upload Attachment:</label><br>
-            <input type="file" name="attachment" id="attachment">
+            <input type="file" name="attachment" id="attachment" accept="image/jpeg,image/jpg,image/png">
         </div>
 
         <button type="submit">Create Post</button>

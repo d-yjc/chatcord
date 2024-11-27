@@ -10,6 +10,7 @@ class Attachment extends Model
         'name',
         'attachable_id',        
         'attachable_type',
+        'file_path'
     ];
 
     public function attachable() {
