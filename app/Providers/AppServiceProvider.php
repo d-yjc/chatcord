@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use Livewire\Livewire;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Livewire::component('comments-list', \App\Http\Livewire\CommentsList::class);
+        Livewire::component('add-comment', \App\Http\Livewire\AddComment::class);
     }
 }

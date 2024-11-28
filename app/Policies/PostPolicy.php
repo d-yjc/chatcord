@@ -13,7 +13,7 @@ class PostPolicy
      */
     public function viewAny(ChatUser $chatUser): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class PostPolicy
      */
     public function view(ChatUser $chatUser, Post $post): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class PostPolicy
      */
     public function create(ChatUser $chatUser): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,9 @@ class PostPolicy
      */
     public function update(ChatUser $chatUser, Post $post): bool
     {
-        return false;
+        return $chatUser->id === $post->chat_user_id
+        || $chatUser->hasExistingRole('admin')
+        || $chatUser->hasExistingRole('moderator');
     }
 
     /**
@@ -45,7 +47,9 @@ class PostPolicy
      */
     public function delete(ChatUser $chatUser, Post $post): bool
     {
-        return false;
+        return $chatUser->id === $post->chat_user_id
+        || $chatUser->hasExistingRole('admin')
+        || $chatUser->hasExistingRole('moderator');
     }
 
     /**
@@ -53,7 +57,8 @@ class PostPolicy
      */
     public function restore(ChatUser $chatUser, Post $post): bool
     {
-        return false;
+        return $chatUser->id === $post->chat_user_id
+        || $chatUser->hasExistingRole('admin');
     }
 
     /**
@@ -61,6 +66,6 @@ class PostPolicy
      */
     public function forceDelete(ChatUser $chatUser, Post $post): bool
     {
-        return false;
+        return $chatUser->hasExistingRole('admin');
     }
 }
