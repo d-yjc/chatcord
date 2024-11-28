@@ -21,7 +21,7 @@ class PostFactory extends Factory
         return [
             'topic' => fake()->sentence(4),
             'body' => fake()->sentence(6),
-            'chat_user_id' => ChatUser::factory()
+            'chat_user_id' => ChatUser::inRandomOrder()->first()->id,
         ];  
     }
     

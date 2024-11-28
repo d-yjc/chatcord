@@ -22,8 +22,8 @@ class ChatUserTableSeeder extends Seeder
 
         // Create users with factory relationships
         ChatUser::factory()
-            ->count(10) 
-            ->hasRoles(rand(1, 2))
+            ->count(20) 
+            ->hasRoles(rand(1, 3))
             ->hasPosts(rand(1, 5)) 
             ->hasComments(rand(1, 5)) 
             ->create();

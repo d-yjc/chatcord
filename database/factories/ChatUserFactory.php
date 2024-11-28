@@ -20,13 +20,13 @@ class ChatUserFactory extends Factory
     {
         return [
             'username' => fake()->name(),
-            'email' => fake()->unique()->email(),
-            'password' => fake()->password(),
+            'email' => fake()->unique()->safeEmail(),
+            'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
         ];
     }
     
-    public function hasRoles($count = 1)
+    public function hasRoles($count)
     {
         return $this->afterCreating(function (ChatUser $user) use ($count) {
             $roles = Role::all();

@@ -4,12 +4,19 @@
 <div class="container">
     <h1>{{ $user->username }}'s Profile</h1>
 
+    <h3>Roles:</h3>
+    <ul>
+        @foreach($user->roles as $role)
+            <li>{{ $role->name }}</li>
+        @endforeach
+    </ul>
+
     <h2>Posts</h2>
     <ul>
         @foreach($user->posts as $post)
             <li>
                 <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
-                <p>{{ $post->body }}</p>
+                <p>{{ $post->topic }}</p>
             </li>
         @endforeach
     </ul>

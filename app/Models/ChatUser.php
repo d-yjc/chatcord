@@ -15,7 +15,7 @@ class ChatUser extends Authenticatable
     protected $fillable = [
         'username',
         'email',
-        'password',
+        'password'
     ];
 
     protected $hidden = [

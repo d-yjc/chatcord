@@ -14,7 +14,7 @@ class ProfileController extends Controller
 {
     public function show($id) 
     {
-        $user = ChatUser::with(['posts', 'comments'])->findOrFail($id);
+        $user = ChatUser::with(['posts', 'comments', 'roles'])->findOrFail($id);
         return view('profile.show', compact('user'));
     }
     
