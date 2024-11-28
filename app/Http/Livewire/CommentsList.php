@@ -18,9 +18,9 @@ class CommentsList extends Component
 
     public function render()
     {
-        return view('livewire.comments-list', [
-            'comments' => $this->post->comments()->with('chatUser')->latest()->get()
-        ]);
+        $comments = $this->post->comments()->with('attachment', 'chatUser')->get();
+
+        return view('livewire.comments-list', compact('comments'));
     }
 }
 

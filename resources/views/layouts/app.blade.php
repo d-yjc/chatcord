@@ -19,9 +19,12 @@
         <div class="container mx-auto flex justify-between items-center">
             <!-- Home Link -->
             <a href="{{ route('home') }}" class="text-xl font-bold hover:text-gray-400">Home</a>
+            <a href="{{ route('posts.index') }}" class="text-xl font-bold hover:text-gray-400">Posts</a>
             
             <div>
                 @auth
+                    <!-- Create post Link -->
+                    <a href="{{ route('posts.create') }}" class="mr-4 hover:text-gray-400">Create Post</a>
                     <!-- Profile Link -->
                     <a href="{{ route('profile.show', auth()->user()->id) }}" class="mr-4 hover:text-gray-400">Profile</a>
                     

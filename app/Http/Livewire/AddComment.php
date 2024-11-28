@@ -28,19 +28,23 @@ class AddComment extends Component
     public function submit()
     {
         $this->validate();
-
+    
         $comment = $this->post->comments()->create([
             'body' => $this->body,
-            'user_id' => auth()->id(),
+            'chat_user_id' => auth()->id(),
         ]);
-
+    
         if ($this->attachment) {
-            $comment->addMedia($this->attachment->getRealPath())->toMediaCollection('attachments');
+            $path = $this->attachment->store('attachments', 'public');
+            $comment->attachment()->create([
+                'file_path' => $path,
+                'name' => $this->attachment->getClientOriginalName(),
+            ]);
         }
-
+    
         $this->reset(['body', 'attachment']);
-
-        $this->emit('commentAdded');
+    
+        $this->dispatch('commentAdded');
     }
 
     public function render()
