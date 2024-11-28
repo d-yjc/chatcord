@@ -1,35 +1,52 @@
 <!-- resources/views/layouts/app.blade.php -->
-
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <title>My Messaging Board</title>
-    <!-- Include CSS files or frameworks here -->
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Application</title>
+    
+    <!-- Vite Styles and Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <!-- Livewire Styles -->
+    @livewireStyles
 </head>
-<body>
-    <nav>   
-        <!-- Navigation links -->
-        <a href="{{ route('posts.index') }}">Home</a>
-        @auth
-            <a href="{{ route('posts.create') }}">Create Post</a>
-            <span>Welcome, {{ auth()->user()->username }}</span>
-            <a href="{{ route('logout') }}">Logout</a>  
-        @else
-            <a href="{{ route('login') }}">Login</a>
-            <a href="{{ route('register') }}">Register</a>
-        @endauth
-    </nav>
-
-    <div class="container">
-        @if(session('success'))
+<body class="bg-gray-100">
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Home Link -->
+            <a href="{{ route('home') }}" class="text-xl font-bold hover:text-gray-400">Home</a>
+            
             <div>
-                {{ session('success') }}
+                @auth
+                    <!-- Profile Link -->
+                    <a href="{{ route('profile.show', auth()->user()->id) }}" class="mr-4 hover:text-gray-400">Profile</a>
+                    
+                    <!-- Logout Link -->
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="hover:text-gray-400">Logout</button>
+                    </form>
+                @else
+                    <!-- Login Link -->
+                    <a href="{{ route('login') }}" class="mr-4 hover:text-gray-400">Login</a>
+                    
+                    <!-- Register Link -->
+                    <a href="{{ route('register') }}" class="hover:text-gray-400">Register</a>
+                @endauth
             </div>
-        @endif
-
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="py-8">
         @yield('content')
-    </div>
+    </main>
 
-    <!-- Include JS files or frameworks here -->
+    <!-- Livewire Scripts -->
+    @livewireScripts
 </body>
 </html>

@@ -1,13 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\ProfileView;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/post/{id}', [PostController::class, 'show']);
 
@@ -27,7 +28,10 @@ Route::get('/logout', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/my-profile', [ProfileController::class, 'showMyProfile'])->name('profile.my');
-    Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
+    //Route::get('/profile/{user}', ProfileView::class)->name('profile.show');
+    Route::get('/profile/{chatUser}', [ProfileController::class, 'show'])->name('profile.show');
+
+    //Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
