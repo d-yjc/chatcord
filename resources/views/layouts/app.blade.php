@@ -14,42 +14,45 @@
     
     <!-- Livewire Styles -->
     @livewireStyles
-    </head>
-    <body class="bg-gray-100">
-        <!-- Navigation Bar -->
-        <nav class="bg-gray-800 text-white p-4">
-            <div class="container mx-auto flex justify-between items-center">
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Links Section -->
+            <div class="flex space-x-6">
                 <!-- Home Link -->
                 <a href="{{ route('dashboard') }}" class="text-xl font-bold hover:text-gray-400">Home</a>
+                <!-- Posts Link -->
                 <a href="{{ route('posts.index') }}" class="text-xl font-bold hover:text-gray-400">Posts</a>
-                
-                <div>
-                    @auth
-                        <!-- Create post Link -->
-                        <a href="{{ route('posts.create') }}" class="mr-4 hover:text-gray-400">Create Post</a>
-                        <!-- Profile Link -->
-                        <a href="{{ route('profile.show', auth()->user()->id) }}" class="mr-4 hover:text-gray-400">Profile</a>
-                        
-                        <!-- Logout Link -->
-                        <form method="POST" action="{{ route('logout') }}" class="inline">
-                            @csrf
-                            <button type="submit" class="hover:text-gray-400">Logout</button>
-                        </form>
-                    @else
-                        <!-- Login Link -->
-                        <a href="{{ route('login') }}" class="mr-4 hover:text-gray-400">Login</a>
-                        
-                        <!-- Register Link -->
-                        <a href="{{ route('register') }}" class="hover:text-gray-400">Register</a>
-                    @endauth
-                </div>
             </div>
-        </nav>
-        
-        <!-- Main Content -->
-        <main class="py-8">
-            @yield('content')
-        </main>
+            
+            <div>
+                @auth
+                    <!-- Create Post Link -->
+                    <a href="{{ route('posts.create') }}" class="mr-4 hover:text-gray-400">Create Post</a>
+                    <!-- Profile Link -->
+                    <a href="{{ route('profile.show', auth()->user()->id) }}" class="mr-4 hover:text-gray-400">Profile</a>
+                    
+                    <!-- Logout Form -->
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit" class="hover:text-gray-400">Logout</button>
+                    </form>
+                @else
+                    <!-- Login Link -->
+                    <a href="{{ route('login') }}" class="mr-4 hover:text-gray-400">Login</a>
+                    <!-- Register Link -->
+                    <a href="{{ route('register') }}" class="hover:text-gray-400">Register</a>
+                @endauth
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="py-8">
+        @yield('content')
+    </main>
 
     <!-- Livewire Scripts -->
     @livewireScripts

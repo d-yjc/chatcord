@@ -23,8 +23,9 @@ Route::resource('posts.comments', CommentController::class)->shallow();
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    $user = auth()->user();
+    return view('dashboard', compact('user'));
+})->middleware('auth')->name('dashboard');
 
 
 
