@@ -61,11 +61,7 @@
         <!-- Comments Section -->
         <div class="mb-6">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4">Comments</h2>
-            @if($post->comments->isEmpty())
-                <p class="text-gray-500">No comments found.</p>
-            @else
-                <livewire:comments-list :post="$post" />
-            @endif
+            <livewire:comments-list :post="$post" />
         </div>
 
         <!-- Add Comment Section -->
@@ -74,5 +70,12 @@
             <h3 class="text-xl font-semibold text-gray-700 mb-4">Add a Comment</h3>
             <livewire:add-comment :post="$post" />
         </div>
+
+        <!-- Display Success Message -->
+        @if (session()->has('message'))
+            <div class="mt-4 p-3 bg-green-100 text-green-700 rounded">
+                {{ session('message') }}
+            </div>
+        @endif
     </div>
 @endsection

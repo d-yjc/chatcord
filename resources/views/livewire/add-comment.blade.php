@@ -31,14 +31,23 @@
             </div>
 
             <!-- Submit Button -->
-            <div>
+            <div class="flex items-center">
                 <button 
                     type="submit" 
-                    class="inline-block bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition duration-200">
+                    class="inline-block bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition duration-200"
+                    wire:loading.attr="disabled">
                     Post Comment
                 </button>
+                <span class="ml-2 text-green-500" wire:loading>Posting...</span>
             </div>
         </form>
+
+        <!-- Success Message -->
+        @if (session()->has('message'))
+            <div class="mt-3 text-green-600">
+                {{ session('message') }}
+            </div>
+        @endif
     @else
         <p class="text-gray-700">Please <a href="{{ route('login') }}" class="text-blue-500 hover:underline">login</a> to add a comment.</p>
     @endauth

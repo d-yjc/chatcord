@@ -43,7 +43,10 @@ class AddComment extends Component
         }
         $this->reset(['body', 'attachment']);
         $this->dispatch('commentAdded');
+        session()->flash('message', 'Comment posted successfully!');
     }
+
+    
 
     public function render()
     {
