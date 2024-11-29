@@ -1,13 +1,32 @@
 <!-- resources/views/livewire/profile-view.blade.php -->
+
 <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <!-- User Information -->
     <div class="mb-6">
         <h1 class="text-3xl font-bold text-gray-800">{{ $user->username }}</h1>
         <p class="text-gray-600">Email: {{ $user->email }}</p>
         <p class="text-gray-600">Joined: {{ $user->created_at->format('d M Y') }}</p>
+        
+        <!-- Display User Roles -->
+        <div class="mt-4">
+            <span class="text-gray-600 font-medium">Roles:</span>
+            @if($user->roles->isEmpty())
+                <span class="text-gray-500">No roles assigned.</span>
+            @else
+                <ul class="flex flex-wrap mt-2 space-x-2">
+                    @foreach($user->roles as $role)
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                            {{ $role->name }}
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
     </div>
 
-    <hr class="mb-6">
+    <hr class="mb-6 border-gray-200">
 
+    <!-- User's Posts -->
     <div class="mb-6">
         <h2 class="text-2xl font-semibold text-gray-700 mb-4">Posts</h2>
         @if($posts->isEmpty())
@@ -24,8 +43,9 @@
         @endif
     </div>
 
-    <hr class="mb-6">
+    <hr class="mb-6 border-gray-200">
 
+    <!-- User's Comments -->
     <div>
         <h2 class="text-2xl font-semibold text-gray-700 mb-4">Comments</h2>
         @if($comments->isEmpty())

@@ -25,7 +25,7 @@
                 </a>
             </p>
 
-            <!-- Action Buttons -->
+            <!-- Update -->
             @can('update', $post)
                 <div class="mt-4">
                     <a href="{{ route('posts.edit', $post->id) }}" class="inline-block bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-200">
@@ -39,6 +39,20 @@
                     <p class="text-red-500">No updating allowed!</p>
                 </div>
             @endcannot
+
+            <!-- Delete -->
+            @can('delete', $post)
+                <div class="mt-4">
+                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="inline-block bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200">
+                            Delete Post
+                        </button>
+                    </form>
+                </div>
+            @endcan
+
         </div>
 
         <!-- Separator -->

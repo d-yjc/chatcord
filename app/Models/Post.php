@@ -9,6 +9,12 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = 
+    [
+        'topic',
+        'body',
+    ];
+
     /**
      * Get the user that posted this post.
      * 
