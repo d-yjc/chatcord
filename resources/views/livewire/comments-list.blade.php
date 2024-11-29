@@ -22,8 +22,9 @@
 
                 @if($comment->attachment)
                     <div class="mt-2">
-                        <a href="{{ asset('storage/' . $comment->attachment->file_path) }}" target="_blank" class="text-blue-500 underline">
-                            {{ $comment->attachment->name }}
+                        <img 
+                        src="{{ asset('storage/' . $comment->attachment->file_path) }}" 
+                        class="rounded-md shadow-md max-w-[200px] max-h-[200px] object-contain">
                         </a>
                     </div>
                 @endif

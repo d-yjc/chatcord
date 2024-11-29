@@ -12,8 +12,18 @@
     <!-- Vite Styles and Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet">
+
     <!-- Livewire Styles -->
     @livewireStyles
+
+    <style>
+        body {
+            font-family: 'Figtree', ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <!-- Navigation Bar -->
@@ -58,3 +68,4 @@
     @livewireScripts
 </body>
 </html>
+

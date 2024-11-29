@@ -9,7 +9,7 @@
         @if($post->attachment)
             <div class="mt-6">
                 <p class="text-gray-600">Attachment:</p>
-                <img src="{{ asset('storage/' . $post->attachment->file_path) }}" alt="Attachment" class="mt-2 rounded-md shadow-sm">
+                <img src="{{ asset('storage/' . $post->attachment->file_path) }}" alt="Attachment" class="rounded-lg shadow-lg w-full max-w-lg">
             </div>
         @endif
 
