@@ -12,9 +12,6 @@
             <p>{{ $comment->body }}</p>
 
             @if($comment->attachment)
-            <p>File Path: {{ $comment->attachment->file_path ?? 'No attachment' }}</p>
-            <p>Attachment: {{ json_encode($comment->attachment) }}</p>
-            
             <img src="{{ asset('storage/' . $comment->attachment->file_path) }}" alt="Comment attachment">
             @endif
         </div>

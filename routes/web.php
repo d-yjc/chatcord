@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\ProfileView;
+use App\Http\Livewire\PostView;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
@@ -10,21 +11,29 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/post/{id}', [PostController::class, 'show']);
 
 
 Route::resource('posts', PostController::class);
 
+
+
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::resource('posts.comments', CommentController::class)->shallow();
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+
 Route::get('/logout', function () {
     Auth::logout();
     return redirect()->route('login');
 })->name('logout');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/my-profile', [ProfileController::class, 'showMyProfile'])->name('profile.my');

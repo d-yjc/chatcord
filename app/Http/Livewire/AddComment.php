@@ -41,9 +41,7 @@ class AddComment extends Component
                 'name' => $this->attachment->getClientOriginalName(),
             ]);
         }
-    
         $this->reset(['body', 'attachment']);
-    
         $this->dispatch('commentAdded');
     }
 

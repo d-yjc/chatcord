@@ -74,13 +74,14 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, Request $request)
     {
         if ($request->user()->cannot('edit', $id)) {
             abort(403);
         }
         return redirect('/posts');
     }
+    
 
     /**
      * Update the specified resource in storage.
