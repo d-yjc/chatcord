@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use App\Services\OpenEmojiService;
 use Livewire\Livewire;
 use Illuminate\Support\ServiceProvider;
 
@@ -11,7 +12,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(OpenEmojiService::class, function($app)
+        {
+            return new OpenEmojiService
+            (
+                config('services.openemoji_api.base_url'),
+                config('services.openemoji_api.api_key')
+            );
+        });
     }
 
     /**

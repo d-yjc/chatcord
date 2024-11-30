@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'openemoji_api' => [
+        'base_url' => env('EMOJI_API_BASE_URL', 'https://emoji-api.com'),
+        'api_key' => env('OPENEMOJI_API_KEY'),
+    ]
+
 ];

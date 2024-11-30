@@ -6,6 +6,7 @@ use App\Models\Attachment;
 use App\Models\Post;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller 
 {
