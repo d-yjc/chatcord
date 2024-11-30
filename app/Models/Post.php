@@ -13,6 +13,7 @@ class Post extends Model
     [
         'topic',
         'body',
+        'chat_user_id',
     ];
 
     /**
@@ -22,7 +23,7 @@ class Post extends Model
      */
     public function chatUser()
     {
-        return $this->belongsTo(ChatUser::class);
+        return $this->belongsTo(ChatUser::class, 'chat_user_id');
     }
 
     public function comments()

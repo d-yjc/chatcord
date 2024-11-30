@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestEmailController;
 use App\Http\Livewire\ProfileView;
 use App\Http\Livewire\PostView;
 use App\Http\Controllers\PostController;
@@ -21,6 +22,7 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
 Route::resource('posts.comments', CommentController::class)->shallow();
 
 
+Route::get('/test-email', [TestEmailController::class, 'sendTestEmail']);
 
 Route::get('/dashboard', function () {
     $user = auth()->user();

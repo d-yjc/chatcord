@@ -9,19 +9,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Envelope; 
 use Illuminate\Queue\SerializesModels;
 
 class CommentNotification extends Mailable
 {
     use Queueable, SerializesModels;
+    
+    public $comment;
 
     /**
      * Create a new message instance.
      */
     public function __construct(Comment $comment)
     {   
-        $this->comment = $comment;
+        $this->comment = $comment->load('post.chatUser', 'chatUser');
     }
 
     /**
@@ -29,8 +31,10 @@ class CommentNotification extends Mailable
      */
     public function envelope(): Envelope
     {
+        $post = $this->comment->post;
+        $postTopic = $this->comment->post->topic ?? 'No topic';
         return new Envelope(
-            subject: 'Comment Notification',
+            subject: "New comment on: {$postTopic}",
         );
     }
 
@@ -40,7 +44,13 @@ class CommentNotification extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.comment-notification',
+            with: [
+                'title' => $this->comment->post->topic ?? 'Title N/A',
+                'body' => $this->comment->body,
+                'sender' => $this->comment->chatUser->username ?? 'Unknown',
+                'postUrl' => url("posts/{$this->comment->post->id}"),
+            ]
         );
     }
 
