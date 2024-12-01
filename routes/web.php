@@ -6,6 +6,7 @@ use App\Http\Livewire\ProfileView;
 use App\Http\Livewire\PostView;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Services\OpenEmojiService;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,11 +17,8 @@ Route::get('/', function () {
 
 Route::resource('posts', PostController::class);
 
-
-
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::resource('posts.comments', CommentController::class)->shallow();
-
 
 Route::get('/test-email', [TestEmailController::class, 'sendTestEmail']);
 

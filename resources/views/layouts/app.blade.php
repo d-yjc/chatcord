@@ -65,6 +65,7 @@
     </main>
 
     <!-- Livewire Scripts -->
+   
     @livewireScripts
 </body>
 </html>

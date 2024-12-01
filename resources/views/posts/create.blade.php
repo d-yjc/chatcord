@@ -3,37 +3,65 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create Post</h1>
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-semibold text-gray-800 mb-6">Create Post</h1>
 
     @if ($errors->any())
-        <div>
-            <strong>Uh oh...</strong> There were some issues with your input.<br><br>
-            <ul>
+        <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+            <strong>Uh oh...</strong> There were some issues with your input:
+            <ul class="mt-2">
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    <li class="text-sm">{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
     @endif
 
-    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
 
+        <!-- Topic Input -->
         <div>
-            <label for="topic">Topic:</label><br>
-            <input type="text" name="topic" id="topic" value="{{ old('topic') }}" required>
+            <label for="topic" class="block text-gray-700 font-medium mb-2">Topic:</label>
+            <input type="text" name="topic" id="topic" value="{{ old('topic') }}" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
 
+        <!-- Body Input -->
         <div>
-            <label for="body">Body:</label><br>
-            <textarea name="body" id="body" required>{{ old('body') }}</textarea>
+            <label for="body" class="block text-gray-700 font-medium mb-2">Body:</label>
+            <textarea name="body" id="body" rows="5" required
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('body') }}</textarea>
         </div>
 
+        <!-- Emoji Picker -->
         <div>
-            <label for="attachment">Upload Attachment:</label><br>
-            <input type="file" name="attachment" id="attachment" accept="image/jpeg,image/jpg,image/png">
+            <livewire:emoji-picker />
         </div>
 
-        <button type="submit">Create Post</button>
+        <!-- File Upload -->
+        <div>
+            <label for="attachment" class="block text-gray-700 font-medium mb-2">Upload Attachment:</label>
+            <input type="file" name="attachment" id="attachment" accept="image/jpeg,image/jpg,image/png"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit"
+                class="w-full md:w-auto px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Create Post
+            </button>
+        </div>
     </form>
+</div>
+<script>
+document.addEventListener('emojiSelected', event => {
+    const emoji = event.detail;
+    const textarea = document.getElementById('body');
+    textarea.focus();
+    const startPos = textarea.selectionStart;
+    textarea.setRangeText(emoji, startPos, startPos, 'end');
+});
+</script>
 @endsection
