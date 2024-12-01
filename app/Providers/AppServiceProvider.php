@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
         {
             return new OpenEmojiService
             (
-                config('services.openemoji_api.base_url'),
+                config('services.openemoji_api.base_url'),  
                 config('services.openemoji_api.api_key')
             );
         });

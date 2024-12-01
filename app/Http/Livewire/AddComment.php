@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
 use App\Mail\CommentNotification;
 use App\Models\Post;
@@ -26,6 +27,12 @@ class AddComment extends Component
     public function mount(Post $post)
     {
         $this->post = $post;
+    }
+
+    #[On('emojiSelected')]
+    public function appendEmoji($emoji)
+    {
+        $this->body .= $emoji;
     }
 
     public function submit()

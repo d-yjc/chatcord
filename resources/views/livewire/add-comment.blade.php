@@ -17,6 +17,10 @@
                 @enderror
             </div>
 
+            <div>
+                <livewire:emoji-picker/>
+            </div>
+
             <!-- Attachment Input -->
             <div>
                 <label for="attachment" class="block text-gray-700 font-medium mb-2">Upload Attachment:</label>

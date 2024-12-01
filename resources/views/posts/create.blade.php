@@ -55,6 +55,7 @@
         </div>
     </form>
 </div>
+<!-- Since we're not using livewire here, we need to add the script within the blade itself.. -->
 <script>
 document.addEventListener('emojiSelected', event => {
     const emoji = event.detail;
