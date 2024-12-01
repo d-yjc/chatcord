@@ -8,15 +8,14 @@ use App\Services\OpenEmojiService;
 class EmojiPicker extends Component
 {
     public $perPage = 30;
-
     public $searchTerm = '';
-    public $emojis     = [];
+    public $emojis = [];
+    protected OpenEmojiService $emojiService;
 
-    public function mount()
+    public function boot(OpenEmojiService $emojiService)
     {
-        \Log::info('EmojiPicker component has mounted.');
+        $this->emojiService = $emojiService;
     }
-
 
     public function updatedSearchTerm()
     {
@@ -27,8 +26,7 @@ class EmojiPicker extends Component
     {
         \Log::info('searchEmojis called with: ' . $this->searchTerm);
         if (!empty($this->searchTerm)) {
-            $emojiService = app(OpenEmojiService::class);
-            $this->emojis = $emojiService->searchEmojis($this->searchTerm);
+            $this->emojis = $this->emojiService->searchEmojis($this->searchTerm);
         } else {
             $this->emojis = [];
         }
@@ -44,5 +42,4 @@ class EmojiPicker extends Component
         \Log::info('EmojiPicker component is rendering.');
         return view('livewire.emoji-picker');
     }
-    
 }
