@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\ChatUser; 
+use App\Models\Role;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -41,6 +42,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        //Assigning the 'member' role
+        $memberRole = Role::where('name', 'member')->first();
+        if ($memberRole) {
+            $user->roles()->attach($memberRole->id);
+        }
         event(new Registered($user));
 
         Auth::login($user);

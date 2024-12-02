@@ -17,7 +17,7 @@
             });
         @endphp
         @forelse ($validEmojis as $emoji)
-            @if (is_array($emoji) && isset($emoji['character'], $emoji['unicodeName']))
+            @if (is_array($emoji) && isset($emoji['character'], $emoji['unicodeName']))     
                 <div wire:click="selectEmoji('{{ $emoji['character'] }}')"
                     class="emoji-item text-2xl cursor-pointer transition-transform transform hover:scale-125"
                     title="{{ $emoji['unicodeName'] }}">
@@ -29,7 +29,7 @@
                 </p>
             @endif
         @empty
-            <p class="col-span-6 sm:col-span-8 md:col-span-10 text-center text-gray-500">No emojis found</p>
+            <p class="flex items-center col-span-full h-full text-gray-500 text-center">No emojis found</p>
         @endforelse
     </div>
 
