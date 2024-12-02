@@ -38,7 +38,8 @@ class CommentPolicy
     public function update(ChatUser $chatUser, Comment $comment): bool
     {
         return $chatUser->id === $comment->chat_user_id
-        || $chatUser->hasExistingRole('admin');
+        || $chatUser->hasExistingRole('admin')
+        || $chatUser->hasExistingRole('moderator');
     }
 
     /**

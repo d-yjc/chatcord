@@ -48,8 +48,7 @@ class PostPolicy
     public function delete(ChatUser $chatUser, Post $post): bool
     {
         return $chatUser->id === $post->chat_user_id
-        || $chatUser->hasExistingRole('admin')
-        || $chatUser->hasExistingRole('moderator');
+        || $chatUser->hasExistingRole('admin');
     }
 
     /**

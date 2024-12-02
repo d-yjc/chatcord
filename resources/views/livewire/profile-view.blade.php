@@ -49,7 +49,7 @@
     @endcan
 
     @can('delete', $user)
-        <div class="mt-4">
+        <div class="mt-4 mb-6">
             <button
                 wire:click="confirmDelete" 
                 class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">

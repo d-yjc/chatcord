@@ -47,12 +47,14 @@
         </div>
 
         <!-- Submit Button -->
+        <!-- Submit Button -->
         <div class="text-center">
             <button type="submit"
-                class="w-full md:w-auto px-6 py-3   -500 text-white rounded-lg font-medium hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                Create Post
+                class="w-full md:w-auto px-6 py-3 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Publish
             </button>
         </div>
+
     </form>
 </div>
 <!-- Since we're not using livewire here, we need to add the script within the blade itself.. -->
