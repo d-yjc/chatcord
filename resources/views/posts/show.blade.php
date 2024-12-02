@@ -1,5 +1,3 @@
-<!-- resources/views/posts/post-view.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -34,25 +32,16 @@
                 </div>
             @endcan
 
-            @cannot('update', $post)
-                <div class="mt-4">
-                    <p class="text-red-500">No updating allowed!</p>
-                </div>
-            @endcannot
-
             <!-- Delete -->
             @can('delete', $post)
                 <div class="mt-4">
-                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="inline-block bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200">
-                            Delete Post
-                        </button>
-                    </form>
+                    <button
+                        onclick="showDeleteModal()"
+                        class="inline-block bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200">
+                        Delete Post
+                    </button>
                 </div>
             @endcan
-
         </div>
 
         <!-- Separator -->
@@ -72,10 +61,50 @@
         </div>
 
         <!-- Display Success Message -->
-        @if (session()->has('message'))
+        @if (session()->has('success'))
             <div class="mt-4 p-3 bg-green-100 text-green-700 rounded">
-                {{ session('message') }}
+                {{ session('success') }}
             </div>
         @endif
+
+        <!-- Delete Confirmation Modal -->
+        <div id="deleteModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden justify-center items-center z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Confirm Deletion</h2>
+        <p class="text-gray-600">Are you sure you want to delete this post?</p>
+        <div class="flex justify-end space-x-4 mt-6">
+            <div>
+                <button
+                    onclick="closeDeleteModal()"
+                    class="bg-gray-500 text-white px-7 py-2 rounded-md hover:bg-gray-600">
+                    Cancel
+                </button>
+            </div>
+            <div>
+                <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        class="bg-red-500 text-white px-7 py-2 rounded-md hover:bg-red-600">
+                        Confirm
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
     </div>
 @endsection
+
+<script>
+    function showDeleteModal() {
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.getElementById('deleteModal').classList.add('flex');
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+        document.getElementById('deleteModal').classList.remove('flex');
+    }
+</script>

@@ -3,39 +3,68 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use Livewire\Attributes\On;
 use App\Models\Post;
+use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class CommentsList extends Component
 {
     public $post;
+    public $editingCommentId = null;
+    public $body;
 
     protected $listeners = ['commentAdded' => '$refresh'];
 
     public function mount(Post $post)
     {
         $this->post = $post;
-    }   
-
-    #[On('commentAdded')]
-    public function refreshComments()
-    {
-        // This method will be called when the 'commentAdded' event is emitted.
-        // To refresh the comments, simply re-render the component by triggering an update.
-        // Livewire automatically re-renders the component when its state changes.
-        // Here, we can set a dummy property to trigger reactivity.
-
-        // Option 1: Reset a dummy property
-        // $this->dummy = now();
-
-        // Option 2: Re-fetch comments by updating a property (if comments are stored in a property)
-        // In this case, since comments are fetched in render(), simply re-rendering is sufficient.
-
-        // Trigger Livewire to re-render the component
-        $this->render();
     }
-    
-    #[On('commentAdded')]
+
+    public function startEditing($commentId)
+    {
+        $comment = Comment::findOrFail($commentId);
+
+        if (Auth::user()->can('update', $comment)) {
+            $this->editingCommentId = $commentId;
+            $this->body = $comment->body;
+        } else {
+            session()->flash('error', 'You do not have permission to edit this comment.');
+        }
+    }
+
+    public function saveEdit()
+    {
+        if ($this->editingCommentId) {
+            $comment = Comment::findOrFail($this->editingCommentId);
+
+            if (Auth::user()->can('update', $comment)) {
+                $this->validate(['body' => 'required|string']);
+                $comment->update(['body' => $this->body]);
+
+                session()->flash('message', 'Comment updated successfully!');
+                $this->resetEditing();
+            } else {
+                session()->flash('error', 'You do not have permission to edit this comment.');
+            }
+        }
+    }
+
+    public function delete($commentId)
+    {
+        $comment = Comment::findOrFail($commentId);
+
+        if (Auth::user()->can('delete', $comment)) {
+            $comment->delete();
+            session()->flash('message', 'Comment deleted successfully!');
+        }
+    }
+
+    public function resetEditing()
+    {
+        $this->editingCommentId = null;
+        $this->body = null;
+    }
+
     public function render()
     {
         $comments = $this->post->comments()->with('attachment', 'chatUser')->get();
@@ -43,4 +72,3 @@ class CommentsList extends Component
         return view('livewire.comments-list', compact('comments'));
     }
 }
-

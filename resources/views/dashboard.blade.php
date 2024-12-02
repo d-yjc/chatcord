@@ -24,7 +24,7 @@
             </p>
         </div>
 
-        <!-- Example Links Section -->
+        <!-- Post & Profile Nav Section -->
         <div class="mt-6">
             <h3 class="text-xl font-semibold text-gray-700 mb-4">Quick Links</h3>
             <div class="flex gap-4">

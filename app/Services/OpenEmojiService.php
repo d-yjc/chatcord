@@ -12,7 +12,7 @@ class OpenEmojiService
     public function __construct(string $baseUrl, string $apiKey)
     {
         $this->baseUrl = $baseUrl;
-        $this->apiKey  = $apiKey;
+        $this->apiKey = $apiKey;
         \Log::info('OpenEmojiService initialized with API key: ' . $this->apiKey);
     }
     

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestEmailController;
+use App\Http\Livewire\EditProfile;
 use App\Http\Livewire\ProfileView;
 use App\Http\Livewire\PostView;
 use App\Http\Controllers\PostController;
@@ -40,9 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-profile', [ProfileController::class, 'showMyProfile'])->name('profile.my');
     //Route::get('/profile/{user}', ProfileView::class)->name('profile.show');
     Route::get('/profile/{chatUser}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/{user}/edit', EditProfile::class)->name('profile.edit');
 
-    //Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    //Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

@@ -31,6 +31,6 @@ class AppServiceProvider extends ServiceProvider
         Livewire::component('comments-list', \App\Http\Livewire\CommentsList::class);
         Livewire::component('add-comment', \App\Http\Livewire\AddComment::class);
         Livewire::component('emoji-picker', \App\Http\Livewire\EmojiPicker::class);
-
+        Livewire::component('edit-profile', \App\Http\Livewire\EditProfile::class);
     }
 }
