@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
+use App\Mail\CommentNotification;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Services\OpenEmojiService;
 use Illuminate\Support\Facades\Mail;
@@ -64,10 +66,18 @@ class AddComment extends Component
                 'name' => $this->attachment->getClientOriginalName(),
             ]);
         }
-
+        $this->sendCommentNotification($comment);
         $this->reset(['body', 'attachment']);
         $this->dispatch('commentAdded');
         session()->flash('message', 'Comment posted successfully!');
+    }
+
+    protected function sendCommentNotification(Comment $comment)
+    {
+        // Ensure the post owner exists and has an email
+        if ($this->post->chatUser && $this->post->chatUser->email) {
+            Mail::to($this->post->chatUser->email)->send(new CommentNotification($comment));
+        }
     }
 
     public function render()
