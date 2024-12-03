@@ -127,7 +127,8 @@ class PostController extends Controller
                 $attachment = new Attachment([
                     'name' => $file->getClientOriginalName(),
                     'file_path' => $filePath,
-                ]);
+                ]);     
+                $post->attachment()->create($attachment);
                 $post->attachment()->save($attachment);
             }
         }
@@ -145,10 +146,10 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
     
-        // Authorize the user using the 'delete' policy
+        // Authorize
         $this->authorize('delete', $post);
     
-        // Delete the attachment if exists
+        // Delete existing attachment...
         if ($post->attachment) {
             Storage::disk('public')->delete($post->attachment->file_path);
             $post->attachment->delete();

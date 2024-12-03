@@ -33,11 +33,6 @@ class ChatUser extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    public function subscription()
-    {
-        return $this->hasOne(Subscription::class);
-    }
-
     public function roles() {
         return $this->belongsToMany(Role::class, 'chat_user_role')->withTimestamps();
     }

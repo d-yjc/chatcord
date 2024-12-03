@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CommentsList extends Component
 {
@@ -54,6 +55,12 @@ class CommentsList extends Component
         $comment = Comment::findOrFail($commentId);
 
         if (Auth::user()->can('delete', $comment)) {
+
+            if ($comment->attachment)
+            {
+                Storage::disk('public')->delete($comment->attachment->file_path);
+                $comment->attachment->delete();
+            }       
             $comment->delete();
             session()->flash('message', 'Comment deleted successfully!');
         }
