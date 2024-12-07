@@ -31,7 +31,7 @@
     <!-- Navigation Bar -->
     <nav class="bg-gray-800 text-white px-6 py-4">
         <div class="container mx-auto flex items-center justify-between">
-            <!-- Logo and Links Section -->
+            <!-- Left Section: Logo and Links -->
             <div class="flex items-center space-x-6">
                 <!-- Logo and Title -->
                 <div class="flex items-center space-x-2">
@@ -47,44 +47,57 @@
                 <a href="{{ route('posts.index') }}" class="text-xl font-bold hover:text-gray-400">Posts</a>
             </div>
 
-
-            <!-- User Section -->
-            <div class="relative">
+            <!-- Right Section: Create Post Button and User Section -->
+            <div class="flex items-center space-x-4">
                 @auth
-                    <!-- Profile Dropdown Trigger -->
-                    <button id="profileDropdownButton"
-                        class="flex items-center space-x-2 hover:text-gray-400 focus:outline-none">
-                        <span>Profile</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-
-                    <!-- Profile Dropdown Menu -->
-                    <div id="profileDropdownMenu"
-                        class="hidden absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded shadow-lg z-10">
-                        <a href="{{ route('profile.show', auth()->user()->id) }}" class="block px-4 py-2 hover:bg-gray-100">
-                            <div>
-                                View Profile
-                                <div class="text-xs text-gray-500">{{ '@' . auth()->user()->username }}</div>
-                            </div>
-                        </a>
-                        <form method="POST" action="{{ route('logout') }}" class="block">
-                            @csrf
-                            <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100">
-                                Log Out
-                            </button>
-                        </form>
-                    </div>
-                @else
-                    <!-- Login and Register Links -->
-                    <a href="{{ route('login') }}" class="mr-4 hover:text-gray-400">Login</a>
-                    <a href="{{ route('register') }}" class="hover:text-gray-400">Register</a>
+                    <!-- Create Post Button -->
+                    <a href="{{ route('posts.create') }}"
+                        class="px-4 py-2 bg-blue-900 text-white rounded-lg font-medium hover:bg-blue-800 transition">
+                        Create Post
+                    </a>
                 @endauth
+
+                <!-- User Section -->
+                <div class="relative">
+                    @auth
+                        <!-- Profile Dropdown Trigger -->
+                        <button id="profileDropdownButton"
+                            class="flex items-center space-x-2 hover:text-gray-400 focus:outline-none">
+                            <span>Profile</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </button>
+
+                        <!-- Profile Dropdown Menu -->
+                        <div id="profileDropdownMenu"
+                            class="hidden absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded shadow-lg z-10">
+                            <a href="{{ route('profile.show', auth()->user()->id) }}"
+                                class="block px-4 py-2 hover:bg-gray-100">
+                                <div>
+                                    View Profile
+                                    <div class="text-xs text-gray-500">{{ '@' . auth()->user()->username }}</div>
+                                </div>
+                            </a>
+                            <form method="POST" action="{{ route('logout') }}" class="block">
+                                @csrf
+                                <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100">
+                                    Log Out
+                                </button>
+                            </form>
+                        </div>
+                    @else
+                        <!-- Login and Register Links -->
+                        <a href="{{ route('login') }}" class="mr-4 hover:text-gray-400">Login</a>
+                        <a href="{{ route('register') }}" class="hover:text-gray-400">Register</a>
+                    @endauth
+                </div>
             </div>
         </div>
     </nav>
+
 
 
     <!-- Main Content -->

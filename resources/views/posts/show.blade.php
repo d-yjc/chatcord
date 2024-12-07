@@ -103,5 +103,6 @@
 
 </div>
 @endsection
+<script src="{{ asset('js/emoji-menu.js') }}"></script>
 
 <script src="{{ asset('js/modal-handler.js') }}"></script>

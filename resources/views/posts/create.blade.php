@@ -1,5 +1,3 @@
-<!-- resources/views/posts/create.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -28,15 +26,24 @@
         </div>
 
         <!-- Body Input -->
-        <div>
+        <div class="relative">
             <label for="body" class="block text-gray-700 font-medium mb-2">Body:</label>
             <textarea name="body" id="body" rows="5" required
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('body') }}</textarea>
-        </div>
 
-        <!-- Emoji Picker -->
-        <div>
-            <livewire:emoji-picker />
+            <!-- Emoji Picker Button -->
+            <button 
+                type="button" 
+                id="emojiPickerButton" 
+                class="absolute bottom-4 right-4 bg-gray-100 text-gray-600 p-3 rounded hover:bg-gray-300 transition focus:outline-none">
+                😊
+            </button>
+
+            <!-- Emoji Picker Menu -->
+            <div id="emojiPickerMenu" 
+                class="hidden absolute bottom-12 right-0 w-64 p-4 bg-white border border-gray-300 rounded-lg shadow-lg">
+                <livewire:emoji-picker />
+            </div>
         </div>
 
         <!-- File Upload -->
@@ -46,7 +53,6 @@
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
         </div>
 
-        <!-- Submit Button -->
         <!-- Submit Button -->
         <div class="text-center">
             <button type="submit"
@@ -59,4 +65,5 @@
 </div>
 <!-- Since we're not using livewire here, we need to add the script within the blade itself.. -->
 <script src="{{ asset('js/emoji-handler.js') }}"></script>
+<script src="{{ asset('js/emoji-menu.js') }}"></script>
 @endsection

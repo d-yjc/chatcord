@@ -21,7 +21,7 @@ class AddComment extends Component
     protected OpenEmojiService $emojiService;
 
     protected $rules = [
-        'body' => 'required|string',
+        'body' => 'required|regex:/\S+/u', #black magic regex to allow emoji-only comments...
         'attachment' => 'nullable|file|max:1024',
     ];
 
@@ -39,6 +39,7 @@ class AddComment extends Component
     public function appendEmoji($emoji)
     {
         $this->body .= $emoji;
+        $this->dispatch('emoji-added');
     }
 
     public function searchEmojis()

@@ -3,7 +3,7 @@
         <p class="text-gray-500">No comments found.</p>
     @else
         @foreach($comments as $comment)
-            <div class="mb-3 border p-2 rounded">
+            <div class="mb-3 border p-3 rounded">
                 @if($comment->chatUser)
                     <p>
                         <strong>
@@ -38,7 +38,9 @@
                     </form>
                 @else
                     <!-- Comment Body -->
+                    <div class="mt-2">
                     <p>{{ $comment->body }}</p>
+                    </div>
                 @endif
 
                 <!-- Attachment -->

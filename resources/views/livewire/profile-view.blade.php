@@ -39,17 +39,17 @@
     
     <!-- Edit/Delete Buttons -->
     @can('update', $user)
-        <div class="mt-4">
+        <div class="mt-4 mb-4">
             <button 
                 wire:click="toggleEditModal" 
-                class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
+                class="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-orange-400">
                 Edit Profile
             </button>
         </div>
     @endcan
 
     @can('delete', $user)
-        <div class="mt-4 mb-6">
+        <div class="mt-4 mb-4">
             <button
                 wire:click="confirmDelete" 
                 class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
