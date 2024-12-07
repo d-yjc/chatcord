@@ -72,6 +72,24 @@ class CommentsList extends Component
         $this->body = null;
     }
 
+    public function reactToComment($commentId)
+    {
+        $comment = Comment::findOrFail($commentId);
+
+        $existingReaction = $comment->reactions()->where('chat_user_id', Auth::id())->first();
+
+        if ($existingReaction) {
+            return;
+        }
+
+        $comment->reactions()->create([
+            'reactionable_id' => $comment->id,
+            'reactionable_type' => Comment::class,
+            'chat_user_id' => Auth::id(),
+        ]); 
+    }
+
+ 
     public function render()
     {
         $comments = $this->post->comments()->with('attachment', 'chatUser')->get();

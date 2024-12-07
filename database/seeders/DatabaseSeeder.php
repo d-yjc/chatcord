@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             ChatUserTableSeeder::class,
             PostTableSeeder::class,
             CommentTableSeeder::class,
-            SubscriptionTableSeeder::class,
         ]);
     }
 }

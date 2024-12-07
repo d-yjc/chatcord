@@ -50,4 +50,9 @@ class ChatUser extends Authenticatable
     {
         return $this->roles()->where('name', $roleName)->exists();
     }
+
+    public function reactions()
+    {
+        return $this->hasMany(Reaction::class);
+    }
 }

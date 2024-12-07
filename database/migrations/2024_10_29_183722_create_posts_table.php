@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             //foreign ref to user's id  
             $table->string('topic');
-            $table->string('body');
+            $table->string('body'); 
 
             $table->bigInteger('chat_user_id')->unsigned();
             $table->foreign('chat_user_id')->references('id')->on('chat_users')
@@ -22,7 +22,7 @@ return new class extends Migration {
 
             $table->timestamps();
         });
-    }
+    }   
 
     /**
      * Reverse the migrations.

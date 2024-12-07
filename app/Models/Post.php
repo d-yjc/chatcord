@@ -35,5 +35,9 @@ class Post extends Model
     {
         return $this->morphOne(Attachment::class, 'attachable');
     }
-    
+
+    public function reactions()
+    {
+        return $this->morphMany(Reaction::class, 'reactionable');
+    }
 }

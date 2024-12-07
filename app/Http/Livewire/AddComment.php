@@ -54,7 +54,7 @@ class AddComment extends Component
     {
         $this->validate();
 
-        $comment = $this->post->comments()->create([
+        $comment = $this->post->comments()->create([ 
             'body' => $this->body,
             'chat_user_id' => auth()->id(),
         ]);

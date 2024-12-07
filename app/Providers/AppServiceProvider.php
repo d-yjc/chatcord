@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
                 config('services.openemoji_api.base_url'),  
                 config('services.openemoji_api.api_key')
             );
-        });
+        });     
     }
 
     /**
@@ -32,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
         Livewire::component('add-comment', \App\Http\Livewire\AddComment::class);
         Livewire::component('emoji-picker', \App\Http\Livewire\EmojiPicker::class);
         Livewire::component('edit-profile', \App\Http\Livewire\EditProfile::class);
+        Livewire::component('post-reactions', \App\Http\Livewire\PostReactions::class);
     }
 }
