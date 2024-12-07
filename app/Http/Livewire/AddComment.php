@@ -17,7 +17,7 @@ class AddComment extends Component
 
     public $post;
     public $body = '';
-    public $attachment;
+    public $attachment;     
     protected OpenEmojiService $emojiService;
 
     protected $rules = [

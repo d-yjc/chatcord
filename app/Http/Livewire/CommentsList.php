@@ -88,7 +88,7 @@ class CommentsList extends Component
             'chat_user_id' => Auth::id(),
         ]); 
     }
-        
+                    
  
     public function render()
     {

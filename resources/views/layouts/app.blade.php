@@ -35,8 +35,8 @@
             <div class="flex items-center space-x-6">
                 <!-- Logo and Title -->
                 <div class="flex items-center space-x-2">
-                    <img src="{{ asset('chatcord_logo.ico') }}" alt="Chatcord Logo" class="h-8 w-8">
-                    <span class="text-xl font-bold">Chatcord</span>
+                    <img src="{{ asset('chatcord_logo.ico') }}" alt="Chatcord Logo" class="h-8 w-8 hidden sm:block">
+                    <span class="text-xl font-bold hidden sm:block">Chatcord</span>
                 </div>
                 <!-- Links -->
                 @auth
