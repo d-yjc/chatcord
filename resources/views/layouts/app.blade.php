@@ -1,6 +1,7 @@
 <!-- resources/views/layouts/app.blade.php -->
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <!-- Meta Tags -->
     <meta charset="utf-8">
@@ -8,10 +9,10 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('chatcord_logo.ico') }}">
 
     <title>Chatcord</title>
-    
+
     <!-- Vite Styles and Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet">
@@ -25,48 +26,76 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-100">
     <!-- Navigation Bar -->
-    <nav class="bg-gray-800 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <!-- Links Section -->
-            <div class="flex space-x-6">
-                <!-- Home Link -->
-                <a href="{{ route('dashboard') }}" class="text-xl font-bold hover:text-gray-400">Home</a>
-                <!-- Posts Link -->
+    <nav class="bg-gray-800 text-white px-6 py-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Logo and Links Section -->
+            <div class="flex items-center space-x-6">
+                <!-- Logo and Title -->
+                <div class="flex items-center space-x-2">
+                    <img src="{{ asset('chatcord_logo.ico') }}" alt="Chatcord Logo" class="h-8 w-8">
+                    <span class="text-xl font-bold">Chatcord</span>
+                </div>
+                <!-- Links -->
+                @auth
+                    <a href="{{ route('dashboard') }}" class="text-xl font-bold hover:text-gray-400">Home</a>
+                @else
+                    <a href="{{ route('home') }}" class="text-xl font-bold hover:text-gray-400">Home</a>
+                @endauth
                 <a href="{{ route('posts.index') }}" class="text-xl font-bold hover:text-gray-400">Posts</a>
             </div>
-            
-            <div>
+
+
+            <!-- User Section -->
+            <div class="relative">
                 @auth
-                    <!-- Create Post Link -->
-                    <a href="{{ route('posts.create') }}" class="mr-4 hover:text-gray-400">Create Post</a>
-                    <!-- Profile Link -->
-                    <a href="{{ route('profile.show', auth()->user()->id) }}" class="mr-4 hover:text-gray-400">Profile</a>
-                    
-                    <!-- Logout Form -->
-                    <form method="POST" action="{{ route('logout') }}" class="inline">
-                        @csrf
-                        <button type="submit" class="hover:text-gray-400">Logout</button>
-                    </form>
+                    <!-- Profile Dropdown Trigger -->
+                    <button id="profileDropdownButton"
+                        class="flex items-center space-x-2 hover:text-gray-400 focus:outline-none">
+                        <span>Profile</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Profile Dropdown Menu -->
+                    <div id="profileDropdownMenu"
+                        class="hidden absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded shadow-lg z-10">
+                        <a href="{{ route('profile.show', auth()->user()->id) }}" class="block px-4 py-2 hover:bg-gray-100">
+                            <div>
+                                View Profile
+                                <div class="text-xs text-gray-500">{{ '@' . auth()->user()->username }}</div>
+                            </div>
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}" class="block">
+                            @csrf
+                            <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100">
+                                Log Out
+                            </button>
+                        </form>
+                    </div>
                 @else
-                    <!-- Login Link -->
+                    <!-- Login and Register Links -->
                     <a href="{{ route('login') }}" class="mr-4 hover:text-gray-400">Login</a>
-                    <!-- Register Link -->
                     <a href="{{ route('register') }}" class="hover:text-gray-400">Register</a>
                 @endauth
             </div>
         </div>
     </nav>
-    
+
+
     <!-- Main Content -->
     <main class="py-8">
         @yield('content')
     </main>
 
     <!-- Livewire Scripts -->
-   
     @livewireScripts
-</body>
-</html>
 
+    @vite(['public/js/profile-dropdown.js'])
+</body>
+
+</html>

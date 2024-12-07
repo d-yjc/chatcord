@@ -53,15 +53,16 @@
         @endcan
     </div>
 
-    <!-- Separator -->
-    <hr class="my-6 border-gray-200">
-
     <!-- Add Comment Section -->
     <hr class="my-6 border-gray-200">
     <div>
         <h3 class="text-xl font-semibold text-gray-700 mb-4">Add a Comment</h3>
         <livewire:add-comment :post="$post" />
     </div>
+
+    <!-- Separator -->
+    <hr class="my-6 border-gray-200">
+
     <!-- Comments Section -->
     <div class="mb-6">
         <h2 class="text-2xl font-semibold text-gray-700 mb-4">Comments</h2>
@@ -101,6 +102,6 @@
     </div>
 
 </div>
-@endsection 
+@endsection
 
 <script src="{{ asset('js/modal-handler.js') }}"></script>
