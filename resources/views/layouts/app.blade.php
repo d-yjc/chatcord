@@ -52,7 +52,7 @@
                 @auth
                     <!-- Create Post Button -->
                     <a href="{{ route('posts.create') }}"
-                        class="px-4 py-2 bg-blue-900 text-white rounded-lg font-medium hover:bg-blue-800 transition">
+                        class="px-4 py-2 bg-blue-800 text-white rounded-lg font-medium hover:bg-blue-600 transition">
                         Create Post
                     </a>
                 @endauth
@@ -98,8 +98,6 @@
         </div>
     </nav>
 
-
-
     <!-- Main Content -->
     <main class="py-8">
         @yield('content')
@@ -108,7 +106,6 @@
     <!-- Livewire Scripts -->
     @livewireScripts
 
-    @vite(['public/js/profile-dropdown.js'])
+    @vite(['js/profile-dropdown.js'])
 </body>
-
 </html>

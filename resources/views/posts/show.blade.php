@@ -12,14 +12,14 @@
             <div class="mt-6">
                 <p class="text-gray-600">Attachment:</p>
                 <img src="{{ asset('storage/' . $post->attachment->file_path) }}" alt="Attachment"
-                    class="rounded-lg shadow-lg w-full max-w-lg">
+                    class="rounded-lg shadow-lg w-full max-w-lg max-w-[350px] max-h-[350px] object-contain">
             </div>
         @endif
         <div class="mt-4">
             @auth
                 <livewire:post-reactions :reactionable="$post" />
             @else
-                <p class="text-gray-500">Log in to react to this post.</p>
+                <p class="text-red-500">You must log in to react with post and comments.</p>
             @endauth
         </div>
 
@@ -30,6 +30,7 @@
             <a href="{{ route('profile.show', $post->chatUser->id) }}" class="text-blue-500 hover:underline">
                 {{ $post->chatUser->username }}
             </a>
+            <p class="text-gray-500">{{  $post->created_at->format('d M Y')}}</p>
         </p>
 
         <!-- Update -->
@@ -104,5 +105,4 @@
 </div>
 @endsection
 <script src="{{ asset('js/emoji-menu.js') }}"></script>
-
 <script src="{{ asset('js/modal-handler.js') }}"></script>

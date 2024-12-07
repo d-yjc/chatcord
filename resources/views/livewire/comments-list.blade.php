@@ -56,8 +56,6 @@
                 <div class="mt-1">
                     @auth
                         <livewire:post-reactions :reactionable="$comment" />
-                    @else
-                        <p class="text-gray-500 text-xs">Log in to react to this comment.</p>
                     @endauth
                 </div>
 

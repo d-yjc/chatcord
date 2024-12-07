@@ -31,7 +31,27 @@
                 @enderror
             </div>
 
-
+            <!-- Roles (Authorized Users Only) -->
+            @if (Auth::user()->hasExistingRole('admin'))
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Roles:</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        @foreach ($availableRoles as $role)
+                            <label class="flex items-center">
+                                <input 
+                                    type="checkbox" 
+                                    wire:model.defer="roles" 
+                                    value="{{ $role->id }}" 
+                                    class="mr-2">
+                                <span class="text-gray-700">{{ $role->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                    @error('roles') 
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
+                </div>
+            @endif
 
             <!-- Submit Button -->
             <div class="flex items-center space-x-4">

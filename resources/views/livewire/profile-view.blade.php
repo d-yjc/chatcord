@@ -2,11 +2,10 @@
 
 <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
     <!-- User Information -->
-     
     <div class="mb-6">
         <h1 class="text-3xl font-bold text-gray-800">{{ $user->username }}</h1>
         <p class="text-gray-600">Email: {{ $user->email }}</p>
-        <p class="text-gray-600">Joined: {{ $user->created_at->format('d M Y') }}</p>
+        <p class="text-gray-600">Joined on: {{ $user->created_at->format('d M Y') }}</p>
 
         <!-- Display User Roles -->
         <div class="mt-4">
@@ -25,8 +24,8 @@
         </div>
     </div>
 
-      <!-- Modal for Edit Profile -->
-      @if ($isEditing)
+    <!-- Modal for Edit Profile -->
+    @if ($isEditing)
         <div class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
             <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
                 <button wire:click="toggleEditModal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600">
@@ -36,7 +35,7 @@
             </div>
         </div>
     @endif
-    
+
     <!-- Edit/Delete Buttons -->
     @can('update', $user)
         <div class="mt-4 mb-4">
@@ -58,8 +57,8 @@
         </div>
     @endcan
 
-      <!-- Delete Confirmation Modal -->
-      @if ($showDeleteConfirmation)
+    <!-- Delete Confirmation Modal -->
+    @if ($showDeleteConfirmation)
         <div class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
             <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg relative">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Confirm Deletion</h2>
@@ -90,10 +89,17 @@
         @else
             <ul class="space-y-2">
                 @foreach($posts as $post)
-                    <li class="flex items-center justify-between bg-gray-100 p-4 rounded">
-                        <a href="{{ route('posts.show', $post->id) }}" class="text-blue-500 hover:underline">{{ $post->topic }}</a>
-                        <span class="text-sm text-gray-500">{{ $post->created_at->format('d M Y') }}</span>
-                    </li>
+                    <!-- Clickable Post Card -->
+                    <a 
+                        href="{{ route('posts.show', $post->id) }}" 
+                        class="block hover:-        translate-y-0.5">
+                        <li 
+                            class="flex items-center justify-between bg-gray-100 p-4 rounded hover:bg-gray-200 transition cursor-pointer"
+                        >
+                            <span class="text-blue-500 hover:underline">{{ $post->topic }}</span>
+                            <span class="text-sm text-gray-500">{{ $post->created_at->format('d M Y') }}</span>
+                        </li>
+                    </a>
                 @endforeach
             </ul>
         @endif
@@ -109,7 +115,7 @@
         @else
             <ul class="space-y-2">
                 @foreach($comments as $comment)
-                    <li class="bg-gray-100 p-4 rounded">
+                    <li class="bg-gray-100 p-4 rounded hover:bg-gray-200 transition">
                         <p class="text-gray-700">
                             Commented on 
                             <a href="{{ route('posts.show', $comment->post->id) }}" class="text-blue-500 hover:underline">{{ $comment->post->topic }}</a>:
@@ -135,4 +141,3 @@
         </div>
     @endif
 </div>
-
