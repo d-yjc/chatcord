@@ -92,7 +92,7 @@
                     <!-- Clickable Post Card -->
                     <a 
                         href="{{ route('posts.show', $post->id) }}" 
-                        class="block hover:-        translate-y-0.5">
+                        class="block hover:-translate-y-0.5">
                         <li 
                             class="flex items-center justify-between bg-gray-100 p-4 rounded hover:bg-gray-200 transition cursor-pointer"
                         >

@@ -30,7 +30,7 @@
                     <img 
                         src="{{ asset('storage/' . $post->attachment->file_path) }}" 
                         alt="Attachment" 
-                        class="rounded w-full max-w-lg max-w-[175px] max-h-[175px] object-contain">
+                        class="rounded w-full max-w-lg max-w-[150px] max-h-[150px] object-contain">
                 </div>
             @endif
         </div>

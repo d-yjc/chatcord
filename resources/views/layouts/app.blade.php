@@ -105,7 +105,6 @@
 
     <!-- Livewire Scripts -->
     @livewireScripts
-
-    @vite(['js/profile-dropdown.js'])
+    @vite(['public/js/profile-dropdown.js'])
 </body>
 </html>

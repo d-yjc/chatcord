@@ -65,6 +65,4 @@
     @else
         <p class="text-gray-700">Please <a href="{{ route('login') }}" class="text-blue-500 hover:underline">login</a> to add a comment.</p>
     @endauth
-    <script src="{{ asset('public/js/emoji-menu.js') }}"></script>
 </div>
-
