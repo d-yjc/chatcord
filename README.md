@@ -23,13 +23,13 @@ Chatcord is a messaging platform connecting people like a cord through chats. Po
 `php artisan key:generate`
 
 
-4. **Run the application**
-#### Start Laravel Sail 
-`php artisan migrate`
- #### Run database migrations 
-`/vendor/bin/sail up -d `
- #### Compile frontend assets
-`npm run dev`
+4. **Run the application:**
+    ##### Start Laravel Sail 
+    `php artisan migrate`
+     ##### Run database migrations 
+    `/vendor/bin/sail up -d `
+     ##### Compile frontend assets
+    `npm run dev`
 
 5. **Access the app**  
 Open your browser and visit:  
