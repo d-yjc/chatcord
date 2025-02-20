@@ -24,11 +24,11 @@ Chatcord is a messaging platform connecting people like a cord through chats. Po
 
 
 4. **Run the application**
-# Start Laravel Sail 
+#### Start Laravel Sail 
 `php artisan migrate`
- # Run database migrations 
+ #### Run database migrations 
 `/vendor/bin/sail up -d `
- # Compile frontend assets
+ #### Compile frontend assets
 `npm run dev`
 
 5. **Access the app**  
